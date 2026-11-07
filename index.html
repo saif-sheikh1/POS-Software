@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no" />
+    <meta name="color-scheme" content="light dark" />
+    <!-- Empty inline icon: stops the browser fetching /favicon.ico, which
+         lives outside the space's routes and fails auth. -->
+    <link rel="icon" href="data:," />
+    <title>POS Software</title>
+    
+  <link rel="stylesheet" crossorigin href="./assets/index-63wq76tk.css"><script type="module">
+const parts = ["./assets/index-f96992y8.part0","./assets/index-f96992y8.part1","./assets/index-f96992y8.part2","./assets/index-f96992y8.part3","./assets/index-f96992y8.part4","./assets/index-f96992y8.part5","./assets/index-f96992y8.part6"];
+const texts = await Promise.all(parts.map(async (p) => {
+  const r = await fetch(p);
+  if (!r.ok) throw new Error("Failed to load app part: " + p);
+  return r.text();
+}));
+await import(URL.createObjectURL(new Blob(texts, { type: "text/javascript" })));
+</script></head>
+  <body>
+    <div
+      data-generated-space-root=""
+      data-generated-space-slug="pos-software"
+    ></div>
+  </body>
+</html>
