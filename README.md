@@ -1,43 +1,35 @@
-# POS Software — Vercel deploy build
+# POS Software — Vercel deployment
 
-Deploy build of the actual POS Software artifact app (ported from the
-Version 1 backup), built 2026-11-08.
+Live link: https://pos-software-muhammad-saifs-projects.vercel.app
 
-## Theme
+## This build — bold and vibrant palette (2026-11-09)
 
-Dark navy (Stitch "Dark Navy Redesign", project
-`projects/13654573335552685556`, 6 screens): deep navy `#0b1326`
-background, navy panels `#131b2e` / `#171f33`, cyan accent `#06b6d4`
-with dark teal-navy `#003640` button text, pale lavender-white
-`#dae2fd` text, Plus Jakarta Sans display font, Inter body, 8px
-radius. Amber is warnings-only; red is suspended/errors. Supersedes
-the light white/indigo theme, the charcoal/emerald theme, and the
-dark blue/gold theme.
+Muhammad's own palette, applied to the POS app (styling only, no
+logic changes):
 
-## App
+- Background / dark surfaces: dark green `#314039` (replaces black/navy)
+- Panels: `#3c4f45` / `#46584d`, borders `#5b6f62`
+- Text: light peach `#f1d9cd` on dark surfaces
+- Primary buttons: burnt orange `#e17439` with white text
+- Highlight: yellow `#f6cb4b` (cart total, "Step 2" and plan "Current" badges)
+- Secondary accent: mauve `#9983a8` ("Step 1" pill)
+- Amber `#f59e0b` warnings only; red `#f87171` errors/suspended
 
-- 42 server actions (39 original + `requestPasswordReset`,
-  `resetPasswordWithCode`, `adminResetAllData`).
-- Multi-business SaaS in PKR: POS, products, stock-in, suppliers,
-  customers, dues ledgers, expenses, P&L reports, staff roles,
-  Super Admin panel (plans, payments, renew/suspend, package dates,
-  password reset, **Reset all data** wipe).
-- Forgot password: 6-digit code to the business email via Resend.
-  Needs the `RESEND_API_KEY` env var on the Vercel project — without
-  it the request answers "Email sending is not set up yet". Super
-  Admin accounts have no email on file and cannot use it.
-- Reset all data: Super Admin only, type exactly `RESET ALL DATA`.
-  Deletes every business, user, product, order and record including
-  the Super Admin account itself — Super Admin setup must be redone
-  afterwards.
+Local verification: 221/221 assertions pass, typecheck clean.
+See `BOLD-PALETTE-NOTES.md` in the source directory for the full
+mapping and the one open flag (printed bonus hex `#9983A8` is mauve,
+but the swatch in his image looks sage-green).
 
-## Files
+## What this is
 
-Prebuilt client (chunked bundle parts) + prebundled CommonJS server
-functions (`api/actions.js`, `api/blobs.js`). No build step on Vercel.
-Env vars required: `TURSO_DATABASE_URL`, `TURSO_AUTH_TOKEN`
-(Turso libSQL, Mumbai), plus the connected private Vercel Blob store
-for product pictures.
+The actual POS Software app (multi-business SaaS in PKR): POS
+counter, products/stock, suppliers, customers, dues, expenses,
+reports/P&L, staff roles, Super Admin panel (plans, payments, renew,
+suspend, package dates, reset-all-data wipe). Trial 14 days, then
+Basic Rs 1,999 / Standard Rs 3,999 / Pro Rs 6,999 per month.
 
-Full port notes: `~/workspace/pos-artifact-vercel/README.md`,
-`STITCH-REDESIGN-NAVY-NOTES.md`, `FORGOT-PASSWORD-WIPE-NOTES.md`.
+## Data
+
+Backed by a Turso (libSQL) database in Mumbai and a private Vercel
+Blob store for product pictures. Sign up with your own business —
+never use anyone else's login.
