@@ -87,7 +87,15 @@ spec, same messages where known) rather than copied from the backup:
   rest of the app, prints black-on-white (no dark backgrounds),
   centred at 80mm so it fits a thermal roll and A4. On screen the
   receipt keeps the navy palette. See `NAVY-PALETTE-2-NOTES.md`
-  (incl. the virtual-printer print check).
+  (incl. the virtual-printer print check). Print fix 2026-11-09:
+  the receipt lives inside the modal overlay (`position: fixed`),
+  and fixed boxes repeat on every printed page in Chromium — the
+  virtual-printer check caught the receipt printing twice on an
+  80mm roll. The print stylesheet now forces every ancestor of
+  the receipt to `position: static` and removes every top-level
+  section that does not contain the receipt, so the print is
+  exactly one page; money amounts never split across lines
+  (`white-space: nowrap` on the totals rows).
 
 ## What changed, and why
 
@@ -119,7 +127,7 @@ api/blobs.ts           Vercel function: /blobs/<token> (new)
 vercel.json            rewrites /actions → /api/actions, /blobs/:key → /api/blobs
 scripts/embed-migrations.mjs  regenerates server/src/migrations.ts
 scripts/prepare-vercel.mjs    builds client + assembles dist-vercel/
-scripts/verify-local.ts       full local end-to-end verification (271 assertions)
+scripts/verify-local.ts       full local end-to-end verification (274 assertions)
 dist-vercel/           deploy directory (regenerated; this is what ships)
 ```
 
@@ -166,7 +174,7 @@ be confirmed in the dashboards at deploy time. No other service is required.
 
 ```sh
 bun run typecheck    # client + server tsconfigs, clean
-bun run verify:local # 271 assertions, fresh file: DB + filesystem blobs
+bun run verify:local # 274 assertions, fresh file: DB + filesystem blobs
 bun run prepare:vercel
 ```
 
